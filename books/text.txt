@@ -1,2 +1,0 @@
-ceci est un text de test.
-This is a text to test the text to speech.
