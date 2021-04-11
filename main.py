@@ -7,7 +7,7 @@ from os import listdir
 def Audi0Book():
 
     try:
-        books = listdir(path='books/')
+        books = listdir(path='pdf-books/')
 
         i = 0
 
@@ -31,7 +31,7 @@ def Audi0Book():
         book = input('>> ')
 
         try:
-            with open('books/{}.pdf'.format(book), 'rb') as desired_book:
+            with open('pdf-books/{}.pdf'.format(book), 'rb') as desired_book:
 
                 full_text = ''
                 
@@ -46,7 +46,7 @@ def Audi0Book():
                     content = next_page.extractText()
                     full_text += content
 
-                audio_reader.save_to_file(full_text, "Audio book of {}.mp3".format(book))
+                audio_reader.save_to_file(full_text, "audio-books/Audio book of {}.mp3".format(book))
                 audio_reader.runAndWait()
 
         except FileNotFoundError:
