@@ -1,5 +1,5 @@
 # Simple audiobook in python
-#Python version: 3.7.8
-Modules:
-# - pyttsx3
-# - pypdf2
+Python version: 3.7.8
+# Modules:
+## - pyttsx3
+## - os

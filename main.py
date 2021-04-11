@@ -1,13 +1,12 @@
 # This whole code is my "take" of the tutorial of NeuralNine: https://www.youtube.com/watch?v=9G47uuBTz04 (this man is <3<3 btw)
 
-from pyttsx3 import init
-from PyPDF2 import PdfFileReader
+from pyttsx3 import init, voice
 from os import listdir
 
 def Audi0Book():
 
     try:
-        books = listdir(path='pdf-books/')
+        books = listdir(path='books/')
 
         i = 0
 
@@ -30,27 +29,28 @@ def Audi0Book():
         ''')
         book = input('>> ')
 
+        book_voice = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'
+
         try:
-            with open('pdf-books/{}.pdf'.format(book), 'rb') as desired_book:
+            with open('books/{}.txt'.format(book), 'r') as desired_book:
 
                 full_text = ''
-                
-                reader = PdfFileReader(desired_book)
 
                 audio_reader = init()
-                audio_reader.setProperty('rate', 150)
+                audio_reader.setProperty('rate', 135)
+                audio_reader.setProperty('voice', book_voice)
 
-                for page in range(reader.numPages):
-                    
-                    next_page = reader.getPage(page)
-                    content = next_page.extractText()
-                    full_text += content
+                for line in desired_book.readlines():
+                        
+                    full_text += line
 
-                audio_reader.save_to_file(full_text, "audio-books/Audio book of {}.mp3".format(book))
+                audio_reader.save_to_file(full_text, "audio-books/[Audi0Book] {}.mp3".format(book))
                 audio_reader.runAndWait()
 
+                print('Done! Audio book saved in \"audio-books\" folder as \"[Audi0Book] {}.mp3\" file.'.format(book))
+
         except FileNotFoundError:
-            print('No book find with title \"{}\", you do not have to add the .pdf extension.'.format(book))
+            print('No book find with title \"{}\", you do not have to add the .txt extension.'.format(book))
             Audi0Book()
     
     except KeyboardInterrupt:
